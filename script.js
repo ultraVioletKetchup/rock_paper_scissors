@@ -11,12 +11,16 @@ function getComputerChoice(){
 
 }
 
+function getPlayerChoice(){
+    let playerChoice = '';
+    while (!moves.includes(playerChoice)){
+        playerChoice = prompt("Your move, move, move...", "").toLowerCase();
+    }
+    return playerChoice;
+}
+
 
 function roundOfGame(playersSel, computersSel) {
-
-    //playersSel = playersSel.toLowerCase();
-
-    console.log(playersSel);
 
     if (!moves.includes(playersSel) || !moves.includes(computersSel))
         return "Invalid Selection";
@@ -27,16 +31,28 @@ function roundOfGame(playersSel, computersSel) {
 
     const win = (playersSel === 'paper' && computersSel === 'rock') || (playersSel === 'rock' && computersSel === 'scissors') || (playersSel === 'scissors' && computersSel === 'paper');
 
-    const lose = (playersSel === 'rock' && computersSel === 'paper') || (playersSel === 'scissors' && computersSel === 'rock') || (playersSel === 'paper' && computersSel === 'scissors');
-    
-    if (win)
-        return "You win! " + playersSel + " beats " + computersSel;
+    // const lose = (playersSel === 'rock' && computersSel === 'paper') || (playersSel === 'scissors' && computersSel === 'rock') || (playersSel === 'paper' && computersSel === 'scissors');
 
-    if (lose)
-        return "You lose! " + computersSel + " beats " + playersSel;
+    if (win) 
+        return 'Win! ' + playersSel + ' beats ' + computersSel + ' !';
+    else
+        return 'Lose ' + playersSel + ' beaten by ' + computersSel + ' !';
 
 }
 
-  
+function playRound(){
+    let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
 
-console.log(roundOfGame('scissors','rock'));
+    console.log(roundOfGame(playerChoice, computerChoice));
+}
+    
+
+function game(){
+    for (let i = 0; i < 5; i++){
+        while (playRound() == 'Tie');
+    }
+}
+
+  
+game();
